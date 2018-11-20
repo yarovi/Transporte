@@ -1,0 +1,69 @@
+
+<html layout:decorator="main">
+<head>
+<meta charset="utf-8" />
+<!-- <title>Insert title here</title> -->
+
+
+</head>
+<body>
+
+	<div layout:fragment="contenido">
+
+		<section class="content">
+
+<!-- 			<form th:action="@{~/dispositivo/mostrarfrm?id=0}"> -->
+			<a th:href="@{~/dispositivo/mostrarfrm?id=0}">
+				<button type="button" class="btn btn-block btn-primary" id="btnNuevo">Agregar
+					Nuevo</button>
+			</a>
+			
+<!-- 			</form> -->
+			<div class="box">
+
+				<table id="example2"
+					class="table table-bordered table-hover dataTable" role="grid"
+					aria-describedby="example2_info">
+					<thead>
+						<tr role="row">
+							<th class="sorting" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Rendering engine: activate to sort column ascending">Codigo</th>
+							<th class="sorting_asc" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Browser: activate to sort column descending"
+								aria-sort="ascending">Descripcion</th>
+							<th class="sorting" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Platform(s): activate to sort column ascending">Puerto</th>
+							<th class="sorting" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Engine version: activate to sort column ascending">Acciones
+								version</th>
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr role="row" class="odd">
+							<td class="">Other browsers</td>
+							<td class="sorting_1">All others</td>
+							<td>-</td>
+							<td>
+
+								<button type="button" class="btn  btn-success ebtn">Editar</button>
+
+
+								<button type="button" class="btn  btn-danger">Eliminar</button>
+							</td>
+
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+		</section>
+
+	</div>
+</body>
+</html>
