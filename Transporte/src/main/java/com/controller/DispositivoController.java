@@ -28,7 +28,7 @@ import com.entity.EDispositivo;
 import com.service.IGenericService;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
 public class DispositivoController {
 
 	private static final Log LOG = LogFactory.getLog(DispositivoController.class);
