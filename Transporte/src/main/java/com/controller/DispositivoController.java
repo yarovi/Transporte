@@ -31,9 +31,7 @@ import com.service.IGenericService;
 @RequestMapping("/api")
 public class DispositivoController {
 
-	private static final Log LOG = LogFactory.getLog(DispositivoController.class);
-
-	
+	private static final Log LOG = LogFactory.getLog(DispositivoController.class);	
 	
 	@Autowired
 	private IGenericService<EDispositivo> dispositivoService;
@@ -41,7 +39,7 @@ public class DispositivoController {
 	@GetMapping("/dispositivos")
 	public ResponseEntity<List<EDispositivo>> findDispositivo()
 	{
-		
+		LOG.info("llamdno al findispositivo ... ");
 		return new ResponseEntity<List<EDispositivo>>(dispositivoService.getAllDispositivo(),HttpStatus.OK);
 	}
 	@GetMapping("/dispositivos/{id}")
@@ -69,38 +67,6 @@ public class DispositivoController {
 		dispositivoService.createDispositivo(nuevoDispositivo);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-//	@GetMapping("/cancel")
-//	public String redirecCancelDispositivo() {
-//		return "redirect:dispositivo/todo";
-//	}
-//	@GetMapping("mostrarfrm")
-//	public String redireccionDispositivo(@RequestParam(name="id", required=false) int id,Model modelo) {
-//		EDispositivo d= new EDispositivo();
-//		if(id!=0) {
-//			
-//		}
-//		modelo.addAttribute("modelo",d);
-//		return PathView.vistafrmDispositivo;
-//	}
-//	@PostMapping("/agregar")
-//	public String AgregarDispositivo(@Valid @ModelAttribute(name="mdispositivo") EDispositivo dispo,
-//			BindingResult bindingresult,Model mdl) {
-//		
-//		String vistaRetorno="";
-//		if(bindingresult.hasErrors())
-//			vistaRetorno=PathView.vistafrmDispositivo;
-//		else {
-//			if(dispo!=null) {
-//				if(dispo.getId()==0) {
-//					
-//					
-//				}else {
-//					
-//				}
-//			}
-//		}
-//		
-//		return vistaRetorno;
-//	}
+
 	
 }
