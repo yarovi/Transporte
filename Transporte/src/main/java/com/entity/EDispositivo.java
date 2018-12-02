@@ -1,4 +1,4 @@
-package com.entiadad;
+package com.entity;
 
 public class EDispositivo {
 
@@ -31,11 +31,14 @@ public class EDispositivo {
 	}
 	@Override
 	public String toString() {
-		return "Dispositivo [id=" + id + ", descripcion=" + descripcion + ", puerto=" + puerto + "]";
+		return "EDispositivo [id=" + id + ", descripcion=" + descripcion + ", puerto=" + puerto + "]";
 	}
 	public EDispositivo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 	
 }

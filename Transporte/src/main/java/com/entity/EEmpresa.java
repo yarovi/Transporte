@@ -1,4 +1,4 @@
-package com.entiadad;
+package com.entity;
 
 import java.util.Arrays;
 
