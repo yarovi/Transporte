@@ -1,17 +1,21 @@
 package com.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,11 +53,12 @@ public class DispositivoController {
 		dispositivo=dispositivoService.findDispositivoxId(id);
 		return new ResponseEntity<EDispositivo>(dispositivo,HttpStatus.OK);
 	}
-	@PutMapping("/dispositivo/update")
-	public ResponseEntity<EDispositivo> updateDispsitivo(@PathVariable(value="id") int id,
+	@PutMapping("/dispositivos/{id}")
+	public  ResponseEntity<EDispositivo>  updateDispsitivo(@PathVariable(value="id") int id,
 			@Valid @RequestBody EDispositivo entity){
-		
-		EDispositivo miDispositivo=dispositivoService.findDispositivoxId(id);
+		LOG.info("Actualizando informacion un dispostivo Nuevo ... ");
+		EDispositivo miDispositivo=dispositivoService.findDispositivoxId(id); 	
+			
 		miDispositivo.setDescripcion(entity.getDescripcion());
 		miDispositivo.setPuerto(entity.getPuerto());
 		miDispositivo=dispositivoService.createDispositivo(miDispositivo);
@@ -61,11 +66,20 @@ public class DispositivoController {
 		
 	}
 	
-	@PostMapping("dispositivos")
+	@PostMapping("/dispositivos")
 	public ResponseEntity<Void> createDispositivo(@RequestBody EDispositivo nuevoDispositivo){
-		
+		LOG.info("Creando un dispostivo Nuevo ... ");
 		dispositivoService.createDispositivo(nuevoDispositivo);
 		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	@DeleteMapping("/dispositivos/{id}")
+	public Map<String, Boolean> deleteDispositivo(@PathVariable(value="id") int id)
+	{
+		dispositivoService.deleteDispositivo(id);
+		Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+	
 	}
 
 	

@@ -1,0 +1,348 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versión del servidor:         10.3.10-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             9.4.0.5125
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Volcando estructura de base de datos para transportedb
+CREATE DATABASE IF NOT EXISTS `transportedb` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `transportedb`;
+
+-- Volcando estructura para tabla transportedb.dispositivo
+CREATE TABLE IF NOT EXISTS `dispositivo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(40) DEFAULT NULL,
+  `puerto` varchar(10) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla transportedb.dispositivo: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `dispositivo` DISABLE KEYS */;
+INSERT INTO `dispositivo` (`id`, `descripcion`, `puerto`, `estado`) VALUES
+	(1, 'default', 'XXX', 1),
+	(2, 'default02', 'GITEC', NULL),
+	(3, 'prueba', 'yasmani', NULL),
+	(4, 'default02', 'GITEC', NULL);
+/*!40000 ALTER TABLE `dispositivo` ENABLE KEYS */;
+
+-- Volcando estructura para tabla transportedb.empresa
+CREATE TABLE IF NOT EXISTS `empresa` (
+  `idempresa` int(11) NOT NULL AUTO_INCREMENT,
+  `razonsocial` varchar(80) NOT NULL,
+  `direccionempresa` varchar(100) NOT NULL,
+  `telefonoempresa` int(11) DEFAULT NULL,
+  `logoempresa` longblob DEFAULT NULL,
+  PRIMARY KEY (`idempresa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla transportedb.empresa: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
+
+-- Volcando estructura para tabla transportedb.pais
+CREATE TABLE IF NOT EXISTS `pais` (
+  `idpais` int(11) NOT NULL AUTO_INCREMENT,
+  `nombrepais` varchar(60) NOT NULL,
+  PRIMARY KEY (`idpais`)
+) ENGINE=InnoDB AUTO_INCREMENT=381 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla transportedb.pais: ~212 rows (aproximadamente)
+/*!40000 ALTER TABLE `pais` DISABLE KEYS */;
+INSERT INTO `pais` (`idpais`, `nombrepais`) VALUES
+	(169, 'AFGANISTÁN '),
+	(170, 'ALBANIA '),
+	(171, 'ALEMANIA '),
+	(172, 'ANDORRA '),
+	(173, 'ANGOLA '),
+	(174, 'ANTIGUA Y BARBUDA '),
+	(175, 'ANTILLAS HOLANDESAS '),
+	(176, 'ARABIA SAUDÍ '),
+	(177, 'ARGELIA '),
+	(178, 'ARGENTINA '),
+	(179, 'ARMENIA '),
+	(180, 'ARUBA '),
+	(181, 'AUSTRALIA '),
+	(182, 'AUSTRIA '),
+	(183, 'AZERBAIYÁN '),
+	(184, 'BAHAMAS '),
+	(185, 'BAHREIN '),
+	(186, 'BANGLADESH '),
+	(187, 'BARBADOS '),
+	(188, 'BÉLGICA '),
+	(189, 'BELICE '),
+	(190, 'BENÍN '),
+	(191, 'BERMUDAS '),
+	(192, 'BIELORRUSIA '),
+	(193, 'BOLIVIA '),
+	(194, 'BOTSWANA '),
+	(195, 'BOSNIA '),
+	(196, 'BRASIL '),
+	(197, 'BRUNEI '),
+	(198, 'BULGARIA '),
+	(199, 'BURKINA FASO '),
+	(200, 'BURUNDI '),
+	(201, 'BUTÁN '),
+	(202, 'CABO VERDE '),
+	(203, 'CAMBOYA '),
+	(204, 'CAMERÚN '),
+	(205, 'CANADÁ '),
+	(206, 'CHAD '),
+	(207, 'CHILE '),
+	(208, 'CHINA '),
+	(209, 'CHIPRE '),
+	(210, 'COLOMBIA '),
+	(211, 'COMORAS '),
+	(212, 'CONGO '),
+	(213, 'COREA DEL NORTE '),
+	(214, 'COREA DEL SUR '),
+	(215, 'COSTA DE MARFIL '),
+	(216, 'COSTA RICA '),
+	(217, 'CROACIA '),
+	(218, 'CUBA '),
+	(219, 'DINAMARCA '),
+	(220, 'DOMINICA '),
+	(221, 'DUBAI '),
+	(222, 'ECUADOR '),
+	(223, 'EGIPTO '),
+	(224, 'EL SALVADOR '),
+	(225, 'EMIRATOS ÁRABES UNIDOS '),
+	(226, 'ERITREA '),
+	(227, 'ESLOVAQUIA '),
+	(228, 'ESLOVENIA '),
+	(229, 'ESPAÑA '),
+	(230, 'ESTADOS UNIDOS DE AMÉRICA '),
+	(231, 'ESTONIA '),
+	(232, 'ETIOPÍA '),
+	(233, 'FIYI '),
+	(234, 'FILIPINAS '),
+	(235, 'FINLANDIA '),
+	(236, 'FRANCIA '),
+	(237, 'GABÓN '),
+	(238, 'GAMBIA '),
+	(239, 'GEORGIA '),
+	(240, 'GHANA '),
+	(241, 'GRECIA '),
+	(242, 'GUAM '),
+	(243, 'GUATEMALA '),
+	(244, 'GUAYANA FRANCESA '),
+	(245, 'GUINEA BISSAU '),
+	(246, 'GUINEA ECUATORIAL '),
+	(247, 'GUINEA '),
+	(248, 'GUYANA '),
+	(249, 'GRANADA '),
+	(250, 'HAITÍ '),
+	(251, 'HONDURAS '),
+	(252, 'HONG KONG '),
+	(253, 'HUNGRÍA '),
+	(254, 'HOLANDA '),
+	(255, 'INDIA '),
+	(256, 'INDONESIA '),
+	(257, 'IRAK '),
+	(258, 'IRÁN '),
+	(259, 'IRLANDA '),
+	(260, 'ISLANDIA '),
+	(261, 'ISLAS CAIMÁN '),
+	(262, 'ISLAS MARSHALL '),
+	(263, 'ISLAS PITCAIRN '),
+	(264, 'ISLAS SALOMÓN '),
+	(265, 'ISRAEL '),
+	(266, 'ITALIA '),
+	(267, 'JAMAICA '),
+	(268, 'JAPÓN '),
+	(269, 'JORDANIA '),
+	(270, 'KAZAJSTÁN '),
+	(271, 'KENIA '),
+	(272, 'KIRGUISTÁN '),
+	(273, 'KIRIBATI '),
+	(274, 'KÓSOVO '),
+	(275, 'KUWAIT '),
+	(276, 'LAOS '),
+	(277, 'LESOTHO '),
+	(278, 'LETONIA '),
+	(279, 'LÍBANO '),
+	(280, 'LIBERIA '),
+	(281, 'LIBIA '),
+	(282, 'LIECHTENSTEIN '),
+	(283, 'LITUANIA '),
+	(284, 'LUXEMBURGO '),
+	(285, 'MACEDONIA '),
+	(286, 'MADAGASCAR '),
+	(287, 'MALASIA '),
+	(288, 'MALAWI '),
+	(289, 'MALDIVAS '),
+	(290, 'MALÍ '),
+	(291, 'MALTA '),
+	(292, 'MARIANAS DEL NORTE '),
+	(293, 'MARRUECOS '),
+	(294, 'MAURICIO '),
+	(295, 'MAURITANIA '),
+	(296, 'MÉXICO '),
+	(297, 'MICRONESIA '),
+	(298, 'MÓNACO '),
+	(299, 'MOLDAVIA '),
+	(300, 'MONGOLIA '),
+	(301, 'MONTENEGRO '),
+	(302, 'MOZAMBIQUE '),
+	(303, 'MYANMAR'),
+	(304, 'NAMIBIA '),
+	(305, 'NAURU '),
+	(306, 'NEPAL '),
+	(307, 'NICARAGUA '),
+	(308, 'NÍGER '),
+	(309, 'NIGERIA '),
+	(310, 'NORUEGA '),
+	(311, 'NUEVA ZELANDA '),
+	(312, 'OMÁN '),
+	(313, 'ORDEN DE MALTA '),
+	(314, 'PAÍSES BAJOS '),
+	(315, 'PAKISTÁN '),
+	(316, 'PALESTINA '),
+	(317, 'PALAU '),
+	(318, 'PANAMÁ '),
+	(319, 'PAPÚA NUEVA GUINEA '),
+	(320, 'PARAGUAY '),
+	(321, 'PERÚ '),
+	(322, 'POLONIA '),
+	(323, 'PORTUGAL '),
+	(324, 'QATAR '),
+	(325, 'REINO UNIDO '),
+	(326, 'REPÚBLICA CENTROAFRICANA '),
+	(327, 'REPÚBLICA CHECA '),
+	(328, 'REPÚBLICA DEL CONGO '),
+	(329, 'REPÚBLICA DEMOCRÁTICA DEL CONGO'),
+	(330, 'REPÚBLICA DOMINICANA '),
+	(331, 'RUANDA '),
+	(332, 'RUMANIA '),
+	(333, 'RUSIA '),
+	(334, 'SÁHARA OCCIDENTAL '),
+	(335, 'SAINT KITTS-NEVIS '),
+	(336, 'SAMOA AMERICANA '),
+	(337, 'SAMOA '),
+	(338, 'SAN MARINO '),
+	(339, 'SANTA LUCÍA'),
+	(340, 'SANTO TOMÉ Y PRÍNCIPE '),
+	(341, 'SAN VICENTE Y LAS GRANADINAS '),
+	(342, 'SENEGAL '),
+	(343, 'SERBIA '),
+	(344, 'SEYCHELLES '),
+	(345, 'SIERRA LEONA '),
+	(346, 'SINGAPUR '),
+	(347, 'SIRIA '),
+	(348, 'SOMALIA '),
+	(349, 'SRI LANKA (ANTES CEILÁN) '),
+	(350, 'SUDÁFRICA '),
+	(351, 'SUDÁN '),
+	(352, 'SUECIA '),
+	(353, 'SUIZA '),
+	(354, 'SUAZILANDIA '),
+	(355, 'TAILANDIA '),
+	(356, 'TAIWÁN O FORMOSA'),
+	(357, 'TANZANIA '),
+	(358, 'TAYIKISTÁN '),
+	(359, 'TÍBET'),
+	(360, 'TIMOR'),
+	(361, 'TOGO '),
+	(362, 'TONGA '),
+	(363, 'TRINIDAD Y TOBAGO '),
+	(364, 'TÚNEZ '),
+	(365, 'TURKMENISTÁN '),
+	(366, 'TURQUÍA '),
+	(367, 'TUVALU '),
+	(368, 'UCRANIA '),
+	(369, 'UGANDA '),
+	(370, 'URUGUAY '),
+	(371, 'UZBEQUISTÁN '),
+	(372, 'VANUATU '),
+	(373, 'VATICANO '),
+	(374, 'VENEZUELA '),
+	(375, 'VIETNAM '),
+	(376, 'WALLIS Y FUTUNA '),
+	(377, 'YEMEN '),
+	(378, 'YIBUTI '),
+	(379, 'ZAMBIA '),
+	(380, 'ZIMBABUE');
+/*!40000 ALTER TABLE `pais` ENABLE KEYS */;
+
+-- Volcando estructura para tabla transportedb.postulante
+CREATE TABLE IF NOT EXISTS `postulante` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `CodDocumento` varchar(3) NOT NULL,
+  `NroDocumento` int(11) NOT NULL,
+  `CodSangre` int(11) NOT NULL,
+  `CodEstadoCivil` int(11) NOT NULL,
+  `idpaisfk` int(11) NOT NULL,
+  `Nombre` varchar(45) NOT NULL,
+  `ApellidoPaterno` varchar(45) NOT NULL,
+  `ApellidoMaterno` varchar(45) NOT NULL,
+  `FechaNacimiento` date NOT NULL,
+  `FechaRegistro` date NOT NULL,
+  `Estatura` decimal(2,2) NOT NULL,
+  `Correo` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pais_postulante_fk` (`idpaisfk`),
+  CONSTRAINT `pais_postulante_fk` FOREIGN KEY (`idpaisfk`) REFERENCES `pais` (`idpais`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla transportedb.postulante: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `postulante` DISABLE KEYS */;
+/*!40000 ALTER TABLE `postulante` ENABLE KEYS */;
+
+-- Volcando estructura para tabla transportedb.tipo
+CREATE TABLE IF NOT EXISTS `tipo` (
+  `TipoId` int(11) NOT NULL AUTO_INCREMENT,
+  `CodTipo` varchar(3) NOT NULL,
+  `Descripcion` varchar(45) DEFAULT NULL,
+  `Parent_idTipo` int(11) DEFAULT NULL,
+  `Referencia` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`TipoId`),
+  KEY `tipo_tipo_fk` (`Parent_idTipo`),
+  CONSTRAINT `tipo_tipo_fk` FOREIGN KEY (`Parent_idTipo`) REFERENCES `tipo` (`TipoId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla transportedb.tipo: ~30 rows (aproximadamente)
+/*!40000 ALTER TABLE `tipo` DISABLE KEYS */;
+INSERT INTO `tipo` (`TipoId`, `CodTipo`, `Descripcion`, `Parent_idTipo`, `Referencia`) VALUES
+	(1, 'EDU', 'NIVEL ESTUDIO', NULL, NULL),
+	(2, 'SGR', 'TIPO SANGRE', NULL, NULL),
+	(3, 'CVL', 'ESTADO CIVIL', NULL, NULL),
+	(4, 'DOC', 'TIPO DOCUMENTO', NULL, NULL),
+	(5, 'EDU', 'PRIMARIA', 1, NULL),
+	(6, 'EDU', 'SECUNDARIA', 1, NULL),
+	(7, 'EDU', 'UNIVERSITARIO', 1, NULL),
+	(8, 'EDU', 'TÉCNICO', 1, NULL),
+	(9, 'EDU', 'SUPERIOR', 1, NULL),
+	(10, 'EDU', 'SUPERIOR INCOMP.', 1, NULL),
+	(11, 'EDU', 'NINGUNA', 1, NULL),
+	(12, 'SGR', 'O+', 2, NULL),
+	(13, 'SGR', 'AB-', 2, NULL),
+	(14, 'SGR', 'A+', 2, NULL),
+	(15, 'SGR', 'A-', 2, NULL),
+	(16, 'SGR', 'B+', 2, NULL),
+	(17, 'SGR', 'B-', 2, NULL),
+	(18, 'SGR', 'O+', 2, NULL),
+	(19, 'SGR', 'O-', 2, NULL),
+	(20, 'CVL', 'SOLTERO', 3, NULL),
+	(21, 'CVL', 'CASADO', 3, NULL),
+	(22, 'CVL', 'VIUDO', 3, NULL),
+	(23, 'CVL', 'DIVORSIADO', 3, NULL),
+	(24, 'CVL', 'SEPARADO', 3, NULL),
+	(25, 'CVL', 'CONVIVIENTE', 3, NULL),
+	(26, 'DOC', 'DNI', 4, 'DOCUMENTO NACIONAL DE IDENTIFICACION'),
+	(27, 'DOC', 'L.E.', 4, 'LIBRETA ELECTORAL'),
+	(28, 'DOC', 'L.M.', 4, 'LIBRETA MILITAR'),
+	(29, 'DOC', 'C.E.', 4, 'CARNET DE EXTRANJERIA'),
+	(30, 'DOC', 'PASSPORT', 4, 'PASAPORTE');
+/*!40000 ALTER TABLE `tipo` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
