@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,9 +33,10 @@ import com.entity.EDispositivo;
 
 import com.service.IGenericService;
 
+
 @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/dispositivo")
 public class DispositivoController {
 
 	private static final Log LOG = LogFactory.getLog(DispositivoController.class);	
@@ -42,20 +44,26 @@ public class DispositivoController {
 	@Autowired
 	private IGenericService<EDispositivo> dispositivoService;
 	
-	@GetMapping("/dispositivos")
+	@GetMapping("/all")
 	public ResponseEntity<List<EDispositivo>> findDispositivo()
 	{
 		LOG.info("llamdno al findispositivo ... ");
 		return new ResponseEntity<List<EDispositivo>>(dispositivoService.getAllDispositivo(),HttpStatus.OK);
 	}
-	@GetMapping("/dispositivos/{id}")
-	public HttpEntity<EDispositivo> findDispositivoxId(@PathVariable int id)
+	@GetMapping(path="/getid/{id}",produces=MediaType.APPLICATION_JSON_VALUE)//
+	public ResponseEntity<EDispositivo> findDispositivoxId(@PathVariable(value = "id") int id)
 	{
+		
 		EDispositivo dispositivo = new EDispositivo();
 		dispositivo=dispositivoService.findDispositivoxId(id);
+		LOG.info("llamdno por id ... "+ dispositivo);
+		
 		return new ResponseEntity<EDispositivo>(dispositivo,HttpStatus.OK);
+		//return new ResponseEntity<EDispositivo>(dispositivoService.findDispositivoxId(id),HttpStatus.OK);
+				
+
 	}
-	@PutMapping("/dispositivos/{id}")
+	@PutMapping("/update/{id}")
 	public  ResponseEntity<EDispositivo>  updateDispsitivo(@PathVariable(value="id") int id,
 			@Valid @RequestBody EDispositivo entity){
 		LOG.info("Actualizando informacion un dispostivo Nuevo ... ");
@@ -68,13 +76,13 @@ public class DispositivoController {
 		
 	}
 	
-	@PostMapping("/dispositivos")
+	@PostMapping("/create")
 	public ResponseEntity<Void> createDispositivo(@RequestBody EDispositivo nuevoDispositivo){
 		LOG.info("Creando un dispostivo Nuevo ... ");
 		dispositivoService.createDispositivo(nuevoDispositivo);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	@DeleteMapping("/dispositivos/{id}")
+	@DeleteMapping("/delete/{id}")
 	public Map<String, Boolean> deleteDispositivo(@PathVariable(value="id") int id)
 	{
 		dispositivoService.deleteDispositivo(id);
