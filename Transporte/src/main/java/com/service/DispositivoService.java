@@ -3,9 +3,11 @@ package com.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.entity.EDispositivo;
+import com.entity.*;
 import com.repository.DispositivoRepository;
 
 
@@ -16,19 +18,19 @@ public class DispositivoService<T> implements IGenericService<EDispositivo>  {
 	private DispositivoRepository dispositivoRepository;
 
 	@Override
-	public EDispositivo createDispositivo(EDispositivo entity) {
+	public EDispositivo create(EDispositivo entity) {
 		
 		return dispositivoRepository.save(entity);
 	}
 
 	@Override
-	public List<EDispositivo> getAllDispositivo() {
+	public List<EDispositivo> readAll() {
 		// TODO Auto-generated method stub
 		return dispositivoRepository.findAll();
 	}
 
 	@Override
-	public EDispositivo editDispositivo(EDispositivo entity) {
+	public EDispositivo edit(EDispositivo entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -36,16 +38,30 @@ public class DispositivoService<T> implements IGenericService<EDispositivo>  {
 	
 
 	@Override
-	public EDispositivo findDispositivoxId(int id) {
+	public EDispositivo findItemxId(int id) {
 		// TODO Auto-generated method stub
 		return dispositivoRepository.getOne(id);
 	}
 
 	@Override
-	public EDispositivo deleteDispositivo(int id) {
+	public EDispositivo delete(int id) {
+		dispositivoRepository.delete(id);
+		return null;
+	}
+//	public Page<EDispositivo> findPaginated(int page, int size){
+//		return dispositivoRepository.findAll(new PageRequest(page,size));
+//	}
+
+	@Override
+	public Page<EDispositivo> findPaginated(int page, int size) {
+		return dispositivoRepository.findAll(new PageRequest(page,size));
+		//return null;
+	}
+
+	@Override
+	public List<EDispositivo> findItemCustom(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	
 }
