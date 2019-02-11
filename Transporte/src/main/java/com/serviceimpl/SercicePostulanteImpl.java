@@ -1,4 +1,4 @@
-package com.service;
+package com.serviceimpl;
 
 import java.util.List;
 
@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.entity.EPostulante;
 import com.repository.PostulanteRepository;
+import com.service.IServicePostulante;
 @Service
-public class PostulanteService <T> implements IGenericService<EPostulante> {
+public class SercicePostulanteImpl implements IServicePostulante {
 
 	@Autowired
 	private PostulanteRepository postulanteRepository;
@@ -35,7 +36,7 @@ public class PostulanteService <T> implements IGenericService<EPostulante> {
 	@Override
 	public EPostulante delete(int id) {
 		// TODO Auto-generated method stub
-		 postulanteRepository.delete(id);
+		postulanteRepository.delete(id);
 		 return null;
 	}
 
@@ -55,6 +56,15 @@ public class PostulanteService <T> implements IGenericService<EPostulante> {
 	public List<EPostulante> findItemCustom(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<EPostulante> buscarxParametro(String tipo, String valor) {
+		// TODO Auto-generated method stub
+		if (tipo.equals("nombre"))
+			return null;//postulanteRepository.buscarxParametroNombre(valor);
+		else
+			return null;		
 	}
 
 }

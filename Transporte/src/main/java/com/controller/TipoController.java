@@ -8,18 +8,25 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entity.EPais;
 import com.entity.ETipo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.modeloDTO.modelTipoDTO;
 import com.service.IGenericService;
+import com.service.IServiceTipo;
+import com.utilidad.ParametroPaginacion;
 
 
 
@@ -30,7 +37,7 @@ public class TipoController {
 	private static final Log LOG = LogFactory.getLog(TipoController.class);
 
 	@Autowired
-	private IGenericService<ETipo> tipoService;
+	private IServiceTipo tipoService;
 	@Autowired
 	private IGenericService<EPais> paisService;
 	@GetMapping("/allinfopostulante")
@@ -69,5 +76,11 @@ public class TipoController {
 		}
 		
 		return new ResponseEntity<Map<String,List<ETipo>> >(miMap,HttpStatus.OK);
+	}
+	
+	@GetMapping("/allSubCategory/{id}")
+	public  ResponseEntity<List<modelTipoDTO>> getAllSubCategory(@PathVariable(value="id") int id){
+		List<modelTipoDTO> lstCategory = tipoService.findBySubCategory(id);
+		return new ResponseEntity<List<modelTipoDTO>>(lstCategory,HttpStatus.OK);
 	}
 }

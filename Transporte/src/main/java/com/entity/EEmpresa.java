@@ -2,18 +2,34 @@ package com.entity;
 
 import java.util.Arrays;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity
+@Table(name = "empresa")
 public class EEmpresa {
 
-	int diempresa;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;
 	String razonsocial;
-	String direccionempresa;
-	int telefonoempresa;
-	byte[] imagenempresa;
-	public int getDiempresa() {
-		return diempresa;
+	int ruc;
+	String direccion;
+	int telefono;
+	String correo;
+	String portal;
+	String representante;
+	byte[] logo;
+	public int getId() {
+		return id;
 	}
-	public void setDiempresa(int diempresa) {
-		this.diempresa = diempresa;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getRazonsocial() {
 		return razonsocial;
@@ -21,43 +37,50 @@ public class EEmpresa {
 	public void setRazonsocial(String razonsocial) {
 		this.razonsocial = razonsocial;
 	}
-	public String getDireccionempresa() {
-		return direccionempresa;
+	public int getRuc() {
+		return ruc;
 	}
-	public void setDireccionempresa(String direccionempresa) {
-		this.direccionempresa = direccionempresa;
+	public void setRuc(int ruc) {
+		this.ruc = ruc;
 	}
-	public int getTelefonoempresa() {
-		return telefonoempresa;
+	public String getDireccion() {
+		return direccion;
 	}
-	public void setTelefonoempresa(int telefonoempresa) {
-		this.telefonoempresa = telefonoempresa;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
-	public byte[] getImagenempresa() {
-		return imagenempresa;
+	public int getTelefono() {
+		return telefono;
 	}
-	public void setImagenempresa(byte[] imagenempresa) {
-		this.imagenempresa = imagenempresa;
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
 	}
-	public EEmpresa(int diempresa, String razonsocial, String direccionempresa, int telefonoempresa,
-			byte[] imagenempresa) {
-		super();
-		this.diempresa = diempresa;
-		this.razonsocial = razonsocial;
-		this.direccionempresa = direccionempresa;
-		this.telefonoempresa = telefonoempresa;
-		this.imagenempresa = imagenempresa;
+	public String getCorreo() {
+		return correo;
 	}
-	public EEmpresa() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
-	@Override
-	public String toString() {
-		return "Empresa [diempresa=" + diempresa + ", razonsocial=" + razonsocial + ", direccionempresa="
-				+ direccionempresa + ", telefonoempresa=" + telefonoempresa + ", imagenempresa="
-				+ Arrays.toString(imagenempresa) + "]";
+	public String getPortal() {
+		return portal;
 	}
+	public void setPortal(String portal) {
+		this.portal = portal;
+	}
+	public String getRepresentante() {
+		return representante;
+	}
+	public void setRepresentante(String representante) {
+		this.representante = representante;
+	}
+	public byte[] getLogo() {
+		return logo;
+	}
+	public void setLogo(byte[] logo) {
+		this.logo = logo;
+	}
+	
+	
 	
 	
 }

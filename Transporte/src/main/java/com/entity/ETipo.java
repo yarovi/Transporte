@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "tipo")
 public class ETipo  {
@@ -16,11 +19,12 @@ public class ETipo  {
 	int tipoid;
 	@Column(name="codtipo")
 	String codtipo;
-	@Column(name="parent_idtipo")
-	int parent_idtipo;
+	@Column(name="parent_idtipo",nullable=true)
+	Integer parent_idtipo;
 	@Column(name="referencia")
 	String referencia;
-	@Column(name="descripcion")
+	@Size(min = 3, message = "El campo descripcion debe estar lleno ")
+	@Column(name="descripcion",nullable=false,length=20)
 	String descripcion;
 	public int getTipoid() {
 		return tipoid;
@@ -28,15 +32,21 @@ public class ETipo  {
 	public void setTipoid(int tipoid) {
 		this.tipoid = tipoid;
 	}
-
+	public String getCodtipo() {
+		return codtipo;
+	}
 	public void setCodtipo(String codtipo) {
 		this.codtipo = codtipo;
 	}
-
-	public void setParent_idtipo(int parent_idtipo) {
+	public Integer getParent_idtipo() {
+		return parent_idtipo;
+	}
+	public void setParent_idtipo(Integer parent_idtipo) {
 		this.parent_idtipo = parent_idtipo;
 	}
-
+	public String getReferencia() {
+		return referencia;
+	}
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
 	}
@@ -46,25 +56,14 @@ public class ETipo  {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
-	
-	
-	
-	public ETipo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	@Override
 	public String toString() {
-		return "ETipo [tipoid=" + tipoid + ", referencia=" + referencia + "]";
-	}
-public ETipo(int tipoid, String descripcion) {
-	super();
-	this.tipoid = tipoid;
-	this.descripcion = descripcion;
-}
+		return "ETipo [tipoid=" + tipoid + ", codtipo=" + codtipo + ", parent_idtipo=" + parent_idtipo + ", referencia="
+				+ referencia + ", descripcion=" + descripcion + "]";
+	}	
 	
 	
+
 	
 	
 }

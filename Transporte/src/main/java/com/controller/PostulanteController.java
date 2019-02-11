@@ -1,6 +1,8 @@
 package com.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -12,8 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,22 +25,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entity.EPostulante;
-import com.service.IGenericService;
+import com.service.IServicePostulante;
+import com.serviceimpl.SercicePostulanteImpl;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/postulante")
+@RequestMapping("/postulantes")
 public class PostulanteController {
 
 	private static final Log LOG = LogFactory.getLog(PostulanteController.class);	
 
 	@Autowired
-	private IGenericService<EPostulante> postulanteService;
+	private IServicePostulante postulanteService;
 	//listando todos los elementos
 	@GetMapping("/all")
 	public ResponseEntity<List<EPostulante>>  findallpostulante(){
+		List<EPostulante> lstPostulante=postulanteService.readAll();
+		LOG.info("Todos los postulante  ... "+ lstPostulante);
 		LOG.info("llamdno al findallpostulante ... ");
-		return new ResponseEntity<List<EPostulante>>(postulanteService.readAll(),HttpStatus.OK);
+		return new ResponseEntity<List<EPostulante>>(lstPostulante,HttpStatus.OK);
 	}
 	//obteniendo elemento por Id
 	@GetMapping(path="/getid/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
@@ -54,21 +61,33 @@ public class PostulanteController {
 			EPostulante mipostulante =postulanteService.findItemxId(id);
 			
 			//cargando datos
-			mipostulante.setCodDocuemnto(entity.getCodDocuemnto());
-			mipostulante.setNroDocumento(entity.getNroDocumento());
-			mipostulante.setCodSangre(entity.getCodSangre());
-			mipostulante.setCodEstadoCivil(entity.getCodEstadoCivil());
-			mipostulante.setCodigoPais(entity.getCodigoPais());
+			mipostulante.setId(entity.getId());
+			mipostulante.setApellidopaterno(entity.getApellidopaterno());
+			mipostulante.setApellidomaterno(entity.getApellidomaterno());
 			mipostulante.setNombre(entity.getNombre());
-			mipostulante.setApellidoPaterno(entity.getApellidoPaterno());
-			mipostulante.setApellidoMaterno(entity.getApellidoMaterno());
-			mipostulante.setFechaNacimiento(entity.getFechaNacimiento());
-			mipostulante.setEstatura(entity.getEstatura());
-			mipostulante.setCorreo(entity.getCorreo());
+			mipostulante.setCoddocumento(entity.getCoddocumento());
+			mipostulante.setNrodocumento(entity.getNrodocumento());
+			mipostulante.setFechanacimiento(entity.getFechanacimiento());
+			mipostulante.setEdad(entity.getEdad());
 			mipostulante.setSexo(entity.getSexo());
+			mipostulante.setCodgrado(entity.getCodgrado());
+			mipostulante.setCodestadocivil(entity.getCodestadocivil());
+			mipostulante.setCodpais(entity.getCodpais());
+			mipostulante.setDireccion(entity.getDireccion());
+			mipostulante.setCorreo(entity.getCorreo());
+			mipostulante.setObservacion(entity.getObservacion());
 			//fin
 			mipostulante=postulanteService.create(mipostulante);
 		return new ResponseEntity<EPostulante>(mipostulante,HttpStatus.OK);
+	}
+	//creando un nuevo postulante
+	@PostMapping("/postulante")
+	public ResponseEntity<Void> createPostulante(
+			@RequestBody EPostulante newpostulante){
+		LOG.info("Los datos antes de isnertar son  : "+ newpostulante);
+		postulanteService.create(newpostulante);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+		
 	}
 	//paginacion
 	@GetMapping("/findget")
@@ -79,4 +98,14 @@ public class PostulanteController {
 		}
 		return resultadoPage;
 	}
+	@DeleteMapping("/delete/{id}")
+	public Map<String, Boolean> deleteDispositivo(@PathVariable(value="id") int id)
+	{
+		postulanteService.delete(id);
+		Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;	
+	}
+//	@GetMapping("buscarxparametro")
+//	public Page
 }

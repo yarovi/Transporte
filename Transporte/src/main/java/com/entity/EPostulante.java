@@ -2,8 +2,6 @@ package com.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,161 +10,137 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "postulante")
-public class EPostulante {
+public class EPostulante implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
-	String CodDocuemnto;
-	String NroDocumento;
-	int CodSangre;
-	int CodEstadoCivil;
-	@Column(name="idpaisfko")
-	int codigoPais;
+	String apellidopaterno;
+	String apellidomaterno;
 	String nombre;
-	String ApellidoPaterno;
-	String ApellidoMaterno;
-	Date FechaNacimiento;
-	Date FechaRegistro;
-	float Estatura;
-	String Correo;
-	String Sexo;
-	public String getSexo() {
-		return Sexo;
-	}
-
-	
-
-	public int getCodigoPais() {
-		return codigoPais;
-	}
-
-
-
-	public void setCodigoPais(int codigoPais) {
-		this.codigoPais = codigoPais;
-	}
-
-
-
-	public void setSexo(String sexo) {
-		Sexo = sexo;
-	}
-	//lista de elementos
-//	@JsonIgnore
-//	 List<ETipo> ListaTipoDocuemnto = new ArrayList<>();
-//	@JsonIgnore
-//	 List<ETipo> ListaGradoAcademico= new ArrayList<>();
-//	@JsonIgnore
-//	 List<ETipo> ListaEstadoCivil= new ArrayList<>();
-	 
-	//fin lista
-	public EPostulante() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-//	@JsonIgnore
-//	public List<ETipo> getListaTipoDocuemnto() {
-//		return ListaTipoDocuemnto;
-//	}
-//	@JsonIgnore
-//	public void setListaTipoDocuemnto(List<ETipo> listaTipoDocuemnto) {
-//		ListaTipoDocuemnto = listaTipoDocuemnto;
-//	}
-//	@JsonIgnore
-//	public List<ETipo> getListaGradoAcademico() {
-//		return ListaGradoAcademico;
-//	}
-//	@JsonIgnore
-//	public void setListaGradoAcademico(List<ETipo> listaGradoAcademico) {
-//		ListaGradoAcademico = listaGradoAcademico;
-//	}
-//	@JsonIgnore
-//	public List<ETipo> getListaEstadoCivil() {
-//		return ListaEstadoCivil;
-//	}
-//	@JsonIgnore
-//	public void setListaEstadoCivil(List<ETipo> listaEstadoCivil) {
-//		ListaEstadoCivil = listaEstadoCivil;
-//	}
+	int coddocumento;
+	String nrodocumento;
+	Date fechanacimiento;
+	int edad;
+	String sexo;
+	int codgrado;
+	int codestadocivil;
+	@Column(name="idpaisfk")
+	int codpais;
+	String direccion;
+	String correo;
+	String observacion;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getCodDocuemnto() {
-		return CodDocuemnto;
+	public String getApellidopaterno() {
+		return apellidopaterno;
 	}
-	public void setCodDocuemnto(String codDocuemnto) {
-		CodDocuemnto = codDocuemnto;
+	public void setApellidopaterno(String apellidopaterno) {
+		this.apellidopaterno = apellidopaterno;
 	}
-	public String getNroDocumento() {
-		return NroDocumento;
+	public String getApellidomaterno() {
+		return apellidomaterno;
 	}
-	public void setNroDocumento(String nroDocumento) {
-		NroDocumento = nroDocumento;
+	public void setApellidomaterno(String apellidomaterno) {
+		this.apellidomaterno = apellidomaterno;
 	}
-	public int getCodSangre() {
-		return CodSangre;
-	}
-	public void setCodSangre(int codSangre) {
-		CodSangre = codSangre;
-	}
-	public int getCodEstadoCivil() {
-		return CodEstadoCivil;
-	}
-	public void setCodEstadoCivil(int codEstadoCivil) {
-		CodEstadoCivil = codEstadoCivil;
-	}
-	
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getApellidoPaterno() {
-		return ApellidoPaterno;
+	public int getCoddocumento() {
+		return coddocumento;
 	}
-	public void setApellidoPaterno(String apellidoPaterno) {
-		ApellidoPaterno = apellidoPaterno;
+	public void setCoddocumento(int coddocumento) {
+		this.coddocumento = coddocumento;
 	}
-	public String getApellidoMaterno() {
-		return ApellidoMaterno;
+	public String getNrodocumento() {
+		return nrodocumento;
 	}
-	public void setApellidoMaterno(String apellidoMaterno) {
-		ApellidoMaterno = apellidoMaterno;
+	public void setNrodocumento(String nrodocumento) {
+		this.nrodocumento = nrodocumento;
 	}
-	public Date getFechaNacimiento() {
-		return FechaNacimiento;
+	public Date getFechanacimiento() {
+		return fechanacimiento;
 	}
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		FechaNacimiento = fechaNacimiento;
+	public void setFechanacimiento(Date fechanacimiento) {
+		this.fechanacimiento = fechanacimiento;
 	}
-	public Date getFechaRegistro() {
-		return FechaRegistro;
+	public int getEdad() {
+		return edad;
 	}
-	public void setFechaRegistro(Date fechaRegistro) {
-		FechaRegistro = fechaRegistro;
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
-	public float getEstatura() {
-		return Estatura;
+	public String getSexo() {
+		return sexo;
 	}
-	public void setEstatura(float estatura) {
-		Estatura = estatura;
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	public int getCodgrado() {
+		return codgrado;
+	}
+	public void setCodgrado(int codgrado) {
+		this.codgrado = codgrado;
+	}
+	public int getCodestadocivil() {
+		return codestadocivil;
+	}
+	public void setCodestadocivil(int codestadocivil) {
+		this.codestadocivil = codestadocivil;
+	}
+	public int getCodpais() {
+		return codpais;
+	}
+	public void setCodpais(int codpais) {
+		this.codpais = codpais;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 	public String getCorreo() {
-		return Correo;
+		return correo;
 	}
 	public void setCorreo(String correo) {
-		Correo = correo;
+		this.correo = correo;
 	}
+	public String getObservacion() {
+		return observacion;
+	}
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+	@Override
+	public String toString() {
+		return "EPostulante [id=" + id + ", apellidopaterno=" + apellidopaterno + ", apellidomaterno=" + apellidomaterno
+				+ ", nombre=" + nombre + ", coddocumento=" + coddocumento + ", nrodocumento=" + nrodocumento
+				+ ", fechanacimiento=" + fechanacimiento + ", edad=" + edad + ", sexo=" + sexo + ", codgrado="
+				+ codgrado + ", codestadocivil=" + codestadocivil + ", codpais=" + codpais + ", direccion=" + direccion
+				+ ", correo=" + correo + ", observacion=" + observacion + "]";
+	}
+	
+	
+	
+	
+
+
+
+	
 	
 	
 	
