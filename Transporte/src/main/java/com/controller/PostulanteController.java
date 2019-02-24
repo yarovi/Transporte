@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entity.EPostulante;
+import com.modeloDTO.modeloPostulanteDTO;
 import com.service.IServicePostulante;
 import com.serviceimpl.SercicePostulanteImpl;
+import com.utilidad.ParametroPaginacion;
 
 @CrossOrigin
 @RestController
@@ -108,4 +110,24 @@ public class PostulanteController {
 	}
 //	@GetMapping("buscarxparametro")
 //	public Page
+	
+	
+	
+	//select personalizados
+	@GetMapping("/allpostulante")
+	public ResponseEntity<List<modeloPostulanteDTO>> findPostulantetoExamen(){
+			//@RequestParam("page") String valor,
+//			@RequestParam("page") int page){
+//		Page<modeloPostulanteDTO> lsresultado=
+//				postulanteService.findPostulantetoExamen(valor, page,ParametroPaginacion.TamPaginacion);
+//		LOG.info("Todos los postulante  ... "+ lsresultado);
+//		if (page > lsresultado.getTotalPages()) {
+//			return null;
+//		}
+//		return lsresultado;
+//		return new ResponseEntity<List<modeloPostulanteDTO>>(lstPostulante,HttpStatus.OK);
+			List<modeloPostulanteDTO> lstPostulante=postulanteService.findPostulantetoExamen();
+			LOG.info("Todos los postulante  ... "+ lstPostulante);
+			return new ResponseEntity<List<modeloPostulanteDTO>>(lstPostulante,HttpStatus.OK);
+	}
 }

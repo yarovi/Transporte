@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.entity.EPostulante;
+import com.modeloDTO.modeloPostulanteDTO;
 import com.repository.PostulanteRepository;
 import com.service.IServicePostulante;
 @Service
@@ -65,6 +66,15 @@ public class SercicePostulanteImpl implements IServicePostulante {
 			return null;//postulanteRepository.buscarxParametroNombre(valor);
 		else
 			return null;		
+	}
+
+	@Override
+	public List<modeloPostulanteDTO> findPostulantetoExamen(){//String valor,int page, int size) {
+		// TODO Auto-generated method stub
+		//return postulanteRepository.findPostulantetoExamen(valor, new PageRequest(page,size));
+		List<modeloPostulanteDTO> lsttmp= postulanteRepository.findPostulantetoExamen();
+		 
+		 return lsttmp;
 	}
 
 }

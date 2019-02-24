@@ -2,6 +2,7 @@ package com.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -24,6 +27,12 @@ public class EPostulante implements Serializable {
 	String apellidomaterno;
 	String nombre;
 	int coddocumento;
+	public LocalDateTime getFecha() {
+		return fecha;
+	}
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
+	}
 	String nrodocumento;
 	Date fechanacimiento;
 	int edad;
@@ -32,9 +41,17 @@ public class EPostulante implements Serializable {
 	int codestadocivil;
 	@Column(name="idpaisfk")
 	int codpais;
+	// ISODate 2019-10-01T05:00:00.000
+	
+	@Column(name="FechaRegistro")
+	@JsonSerialize(using = ToStringSerializer.class) 
+	private LocalDateTime fecha;
+//		@JsonSerialize(using = ToStringSerializer.class) 		
 	String direccion;
 	String correo;
 	String observacion;
+	@Column(name="estado")
+	String estado;
 	public int getId() {
 		return id;
 	}

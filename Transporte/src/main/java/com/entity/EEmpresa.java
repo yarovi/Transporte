@@ -1,12 +1,13 @@
 package com.entity;
 
-import java.util.Arrays;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -18,12 +19,15 @@ public class EEmpresa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	String razonsocial;
-	int ruc;
+	@Size(min = 12,max=12, message = "Este campo exige 12 caracteres")
+	String ruc;
 	String direccion;
+	@NotNull(message = "Debe ingresar un telefono")
 	int telefono;
 	String correo;
 	String portal;
 	String representante;
+	@Lob
 	byte[] logo;
 	public int getId() {
 		return id;
@@ -37,10 +41,10 @@ public class EEmpresa {
 	public void setRazonsocial(String razonsocial) {
 		this.razonsocial = razonsocial;
 	}
-	public int getRuc() {
+	public String getRuc() {
 		return ruc;
 	}
-	public void setRuc(int ruc) {
+	public void setRuc(String ruc) {
 		this.ruc = ruc;
 	}
 	public String getDireccion() {

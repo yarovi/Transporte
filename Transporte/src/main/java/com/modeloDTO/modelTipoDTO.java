@@ -24,5 +24,8 @@ public class modelTipoDTO {
 		this.id = id;
 		this.descripcion = descripcion;
 	}
+	public modelTipoDTO() {
+		super();
+	}
 	
 }

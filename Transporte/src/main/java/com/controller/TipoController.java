@@ -41,30 +41,31 @@ public class TipoController {
 	@Autowired
 	private IGenericService<EPais> paisService;
 	@GetMapping("/allinfopostulante")
-	public ResponseEntity<Map<String,List<ETipo>> > allinfopostulante(){ //List<Documento>
-		List<ETipo> lstTipo=null;
+	public ResponseEntity<Map<String,List<modelTipoDTO>> > allinfopostulante(){ //List<Documento>
+		List<modelTipoDTO> lstTipo=null;
 		List<EPais> lstPais=null;
 		Gson obj = new GsonBuilder().create();
-		Map<String,List<ETipo>> miMap = new HashMap<String,List<ETipo>>(); 
+		Map<String,List<modelTipoDTO>> miMap = new HashMap<String,List<modelTipoDTO>>(); 
 		String rpta="";
 		try {
 			//cargando documentos
-			lstTipo= tipoService.findItemCustom(4);
+
+			lstTipo= tipoService.findBySubCategory(4);
 			miMap.put("identificacion", lstTipo);	
 			//cargando estado civil
-			lstTipo= tipoService.findItemCustom(3);
+			lstTipo= tipoService.findBySubCategory(3);
 			miMap.put("estadocivil", lstTipo);
 			//cargando grado academico
-			lstTipo= tipoService.findItemCustom(1);
+			lstTipo= tipoService.findBySubCategory(1);
 			miMap.put("grado", lstTipo);
 			rpta= obj.toJson(miMap);
 			//lista de paises
 			lstPais=paisService.readAll();
 			lstTipo=null;
-			lstTipo= new ArrayList<ETipo>();
+			lstTipo= new ArrayList<modelTipoDTO>();
 			for(EPais p :lstPais) {
-				ETipo etipo = new ETipo();
-				etipo.setTipoid(p.getId());
+				modelTipoDTO etipo = new modelTipoDTO();
+				etipo.setId(p.getId());
 				etipo.setDescripcion(p.getNombre());
 				lstTipo.add(etipo);
 			}
@@ -75,7 +76,46 @@ public class TipoController {
 			LOG.info("hay no se malogro... " +e.getMessage());
 		}
 		
-		return new ResponseEntity<Map<String,List<ETipo>> >(miMap,HttpStatus.OK);
+		return new ResponseEntity<Map<String,List<modelTipoDTO>> >(miMap,HttpStatus.OK);
+	}
+	@GetMapping("/allinfoexamen")
+	public ResponseEntity<Map<String,List<modelTipoDTO>> > allinfoexamen(){ //List<Documento>
+		List<modelTipoDTO> lstTipo=null;
+		List<EPais> lstPais=null;
+		Gson obj = new GsonBuilder().create();
+		Map<String,List<modelTipoDTO>> miMap = new HashMap<String,List<modelTipoDTO>>(); 
+		String rpta="";
+		try {
+
+			//licencia
+			lstTipo= tipoService.findBySubCategory(67);
+			miMap.put("licencia", lstTipo);	
+			//actitud
+			lstTipo= tipoService.findBySubCategory(72);
+			miMap.put("actitud", lstTipo);
+			//restriccion
+			lstTipo= tipoService.findBySubCategory(95);
+			miMap.put("restriccion", lstTipo);
+			//categoria
+			lstTipo= tipoService.findBySubCategory(103);
+			miMap.put("categoria", lstTipo);
+			//comportamiento
+			lstTipo= tipoService.findBySubCategory(112);
+			miMap.put("comportamiento", lstTipo);
+			//enfermedad
+			lstTipo= tipoService.findBySubCategory(82);
+			miMap.put("enfermedad", lstTipo);
+			//sangre
+			lstTipo= tipoService.findBySubCategory(2);
+			miMap.put("sangre", lstTipo);
+			rpta= obj.toJson(miMap);
+			LOG.info("informacion.. " +rpta);
+			;
+		}catch (Exception e) {
+			LOG.info("hay no se malogro... " +e.getMessage());
+		}
+		
+		return new ResponseEntity<Map<String,List<modelTipoDTO>> >(miMap,HttpStatus.OK);
 	}
 	
 	@GetMapping("/allSubCategory/{id}")

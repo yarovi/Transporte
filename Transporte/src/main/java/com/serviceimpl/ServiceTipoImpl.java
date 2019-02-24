@@ -56,7 +56,7 @@ public class ServiceTipoImpl implements IServiceTipo {
 	@Override
 	public List<ETipo> findItemCustom(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return null;// tipoRepository.find;
 	}
 
 	@Override

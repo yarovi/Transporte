@@ -9,18 +9,13 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,10 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.entity.EDispositivo;
-
 import com.service.IGenericService;
+import com.utilidad.Puerto;
 
 
 @CrossOrigin
@@ -51,6 +45,15 @@ public class DispositivoController {
 		LOG.info("llamdno al findispositivo ... ");
 		return new ResponseEntity<List<EDispositivo>>(dispositivoService.readAll(),HttpStatus.OK);
 	}
+	//listando los dipositivos
+	@GetMapping("/listadispositivo")
+	public String listaDispositivos(){
+		
+		Puerto mipuerto = new Puerto();
+		return mipuerto.getListaPuerto();
+	}
+	
+	
 	@GetMapping(path="/getid/{id}",produces=MediaType.APPLICATION_JSON_VALUE)//
 	public ResponseEntity<EDispositivo> findDispositivoxId(@PathVariable(value = "id") int id)
 	{

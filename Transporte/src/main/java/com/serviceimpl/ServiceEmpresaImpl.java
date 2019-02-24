@@ -23,7 +23,7 @@ public class ServiceEmpresaImpl implements IServiceEmpresa {
 	@Override
 	public List<EEmpresa> readAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return empresaRepository.findAll();
 	}
 
 	@Override
@@ -35,13 +35,14 @@ public class ServiceEmpresaImpl implements IServiceEmpresa {
 	@Override
 	public EEmpresa delete(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		 empresaRepository.delete(id);
+		 return null;
 	}
 
 	@Override
 	public EEmpresa findItemxId(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return empresaRepository.getOne(id);
 	}
 
 	@Override
@@ -61,6 +62,12 @@ public class ServiceEmpresaImpl implements IServiceEmpresa {
 		// TODO Auto-generated method stub
 		EEmpresa empresa= new EEmpresa();
 		return empresa;
+	}
+
+	@Override
+	public int updateLogo(int id, byte[] img) {
+		int rpta=empresaRepository.updateLogo(id, img);
+		return rpta;
 	}
 	
 
