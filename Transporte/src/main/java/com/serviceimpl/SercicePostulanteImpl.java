@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.entity.EPostulante;
+import com.modeloDTO.modeloEvaluacionDTO;
 import com.modeloDTO.modeloPostulanteDTO;
 import com.repository.PostulanteRepository;
 import com.service.IServicePostulante;
@@ -75,6 +76,18 @@ public class SercicePostulanteImpl implements IServicePostulante {
 		List<modeloPostulanteDTO> lsttmp= postulanteRepository.findPostulantetoExamen();
 		 
 		 return lsttmp;
+	}
+
+	@Override
+	public Page<modeloEvaluacionDTO> findPostulantetoEvaluacion(String valor, int page, int size) {
+		// TODO Auto-generated method stub
+		return postulanteRepository.findPostulantetoEvaluacion(valor,new PageRequest(page,size));
+	}
+
+	@Override
+	public Page<modeloEvaluacionDTO> findPostulantetoEvaluacionxNroDocumento(String valor, int page, int size) {
+		// TODO Auto-generated method stub
+		return postulanteRepository.findPostulantetoEvaluacionxNroDocumento(valor,new PageRequest(page,size));
 	}
 
 }

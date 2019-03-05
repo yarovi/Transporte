@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entity.EPostulante;
+import com.modeloDTO.modeloEvaluacionDTO;
 import com.modeloDTO.modeloPostulanteDTO;
 import com.service.IServicePostulante;
-import com.serviceimpl.SercicePostulanteImpl;
 import com.utilidad.ParametroPaginacion;
 
 @CrossOrigin
@@ -108,10 +108,6 @@ public class PostulanteController {
         response.put("deleted", Boolean.TRUE);
         return response;	
 	}
-//	@GetMapping("buscarxparametro")
-//	public Page
-	
-	
 	
 	//select personalizados
 	@GetMapping("/allpostulante")
@@ -129,5 +125,25 @@ public class PostulanteController {
 			List<modeloPostulanteDTO> lstPostulante=postulanteService.findPostulantetoExamen();
 			LOG.info("Todos los postulante  ... "+ lstPostulante);
 			return new ResponseEntity<List<modeloPostulanteDTO>>(lstPostulante,HttpStatus.OK);
+	}
+	@GetMapping("/allpostulantetoexamen")
+	public Page<modeloEvaluacionDTO> findPostulantetoEvaluacion(
+			@RequestParam("tipo") String tipo,
+			@RequestParam("valor") String valor,
+			@RequestParam("page") int page){
+		
+		Page<modeloEvaluacionDTO> lsresultado=postulanteService.findPostulantetoEvaluacion(valor, page,ParametroPaginacion.tamPageSubcateoria);
+		if(tipo.equals("nrodocumento")) {
+			lsresultado=postulanteService.findPostulantetoEvaluacionxNroDocumento(valor, page,ParametroPaginacion.tamPageSubcateoria);
+		}else {
+			lsresultado=postulanteService.findPostulantetoEvaluacion(valor, page,ParametroPaginacion.tamPageSubcateoria);
+		}
+		
+		
+		LOG.info("Todos los postulante  ... "+ lsresultado);
+		if (page > lsresultado.getTotalPages()) {
+			return null;
+		}
+		return lsresultado;
 	}
 }

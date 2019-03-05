@@ -1,56 +1,49 @@
 package com.entity;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+//import com.utilidad.LocalDateTimeDeserializer;
+//import com.utilidad.LocalDateTimeSerializer;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+
+/*Never forget
+ * If you want to use @Column(...), then use small-case letters always even though your actual DB column is in camel-case.
+ * */
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "postulante")
-public class EPostulante implements Serializable {
-
+public class EPostulante  {	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	String apellidopaterno;
 	String apellidomaterno;
 	String nombre;
-	int coddocumento;
-	public LocalDateTime getFecha() {
-		return fecha;
-	}
-	public void setFecha(LocalDateTime fecha) {
-		this.fecha = fecha;
-	}
+	int coddocumento;	
 	String nrodocumento;
 	Date fechanacimiento;
 	int edad;
 	String sexo;
 	int codgrado;
 	int codestadocivil;
-	@Column(name="idpaisfk")
 	int codpais;
-	// ISODate 2019-10-01T05:00:00.000
-	
-	@Column(name="FechaRegistro")
-	@JsonSerialize(using = ToStringSerializer.class) 
-	private LocalDateTime fecha;
-//		@JsonSerialize(using = ToStringSerializer.class) 		
 	String direccion;
 	String correo;
 	String observacion;
-	@Column(name="estado")
+//	@JsonDeserialize(using =LocalDateTimeDeserializer.class)
+//	@JsonSerialize(using =LocalDateTimeSerializer.class)
+	@JsonSerialize(using = ToStringSerializer.class) 
+	LocalDateTime fecharegistro;
 	String estado;
 	public int getId() {
 		return id;
@@ -87,12 +80,6 @@ public class EPostulante implements Serializable {
 	}
 	public void setNrodocumento(String nrodocumento) {
 		this.nrodocumento = nrodocumento;
-	}
-	public Date getFechanacimiento() {
-		return fechanacimiento;
-	}
-	public void setFechanacimiento(Date fechanacimiento) {
-		this.fechanacimiento = fechanacimiento;
 	}
 	public int getEdad() {
 		return edad;
@@ -142,23 +129,24 @@ public class EPostulante implements Serializable {
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
 	}
-	@Override
-	public String toString() {
-		return "EPostulante [id=" + id + ", apellidopaterno=" + apellidopaterno + ", apellidomaterno=" + apellidomaterno
-				+ ", nombre=" + nombre + ", coddocumento=" + coddocumento + ", nrodocumento=" + nrodocumento
-				+ ", fechanacimiento=" + fechanacimiento + ", edad=" + edad + ", sexo=" + sexo + ", codgrado="
-				+ codgrado + ", codestadocivil=" + codestadocivil + ", codpais=" + codpais + ", direccion=" + direccion
-				+ ", correo=" + correo + ", observacion=" + observacion + "]";
+	public Date getFechanacimiento() {
+		return fechanacimiento;
+	}
+	public void setFechanacimiento(Date fechanacimiento) {
+		this.fechanacimiento = fechanacimiento;
 	}
 	
-	
-	
-	
-
-
-
-	
-	
-	
+	public LocalDateTime getFecharegistro() {
+		return fecharegistro;
+	}
+	public void setFecharegistro(LocalDateTime fecharegistro) {
+		this.fecharegistro = fecharegistro;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	
 }

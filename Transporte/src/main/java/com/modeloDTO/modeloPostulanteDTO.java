@@ -4,13 +4,17 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+//import com.utilidad.LocalDateTimeDeserializer;
+//import com.utilidad.LocalDateTimeSerializer;
 
 public class modeloPostulanteDTO {
 
 	int id;
-	String Codigo;
-//	String fechaRegistro;
-	LocalDateTime registro;
+	String nombres;
+//	@JsonDeserialize(using =LocalDateTimeDeserializer.class)
+//	@JsonSerialize(using =LocalDateTimeSerializer.class)
+	@JsonSerialize(using = ToStringSerializer.class) 
+	LocalDateTime fecha;	
 	
 	public int getId() {
 		return id;
@@ -18,40 +22,29 @@ public class modeloPostulanteDTO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getCodigo() {
-		return Codigo;
+	public String getNombres() {
+		return nombres;
 	}
-	public void setCodigo(String codigo) {
-		Codigo = codigo;
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
 	}
-//	public String getFechaRegistro() {
-//		return fechaRegistro;
-//	}
-//	public void setFechaRegistro(String fechaRegistro) {
-//		this.fechaRegistro = fechaRegistro;
-//	}
-	@JsonSerialize(using = ToStringSerializer.class) 
 	public LocalDateTime getFecha() {
-		return registro;
+		return fecha;
 	}
 	public void setFecha(LocalDateTime fecha) {
-		this.registro = fecha;
+		this.fecha = fecha;
 	}
-	public modeloPostulanteDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-//	public modeloPostulanteDTO(int id, String codigo, String fechaRegistro) {
-//		this.id = id;
-//		Codigo = codigo;
-//		this.fechaRegistro=fechaRegistro;
-//	}
-	public modeloPostulanteDTO(int id, String codigo, LocalDateTime fecha) {
+	public modeloPostulanteDTO(int id, String codigo, LocalDateTime fecharegistro) {
 		super();
 		this.id = id;
-		Codigo = codigo;
-		this.registro = fecha;
+		this.nombres = codigo;
+		this.fecha = fecharegistro;
 	}
-	
-	
+	public modeloPostulanteDTO(int id, String codigo) {
+		super();
+		this.id = id;
+		this.nombres = codigo;
+//		this.fecharegistro = fecha;
+	}
+		
 }
