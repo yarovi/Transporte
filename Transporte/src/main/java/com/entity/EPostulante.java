@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 //import com.utilidad.LocalDateTimeDeserializer;
@@ -19,7 +21,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 /*Never forget
  * If you want to use @Column(...), then use small-case letters always even though your actual DB column is in camel-case.
  * */
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "postulante")
 public class EPostulante  {	
@@ -40,11 +42,14 @@ public class EPostulante  {
 	String direccion;
 	String correo;
 	String observacion;
-//	@JsonDeserialize(using =LocalDateTimeDeserializer.class)
-//	@JsonSerialize(using =LocalDateTimeSerializer.class)
-	@JsonSerialize(using = ToStringSerializer.class) 
+	//@Transient
+	@JsonSerialize(using = ToStringSerializer.class)	
 	LocalDateTime fecharegistro;
+	@Transient
 	String estado;
+	Integer telefono;
+	String ocupacion;
+	
 	public int getId() {
 		return id;
 	}
@@ -147,6 +152,18 @@ public class EPostulante  {
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	public Integer getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(Integer telefono) {
+		this.telefono = telefono;
+	}
+	public String getOcupacion() {
+		return ocupacion;
+	}
+	public void setOcupacion(String ocupacion) {
+		this.ocupacion = ocupacion;
 	}
 	
 }

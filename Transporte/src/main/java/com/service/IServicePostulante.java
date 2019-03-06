@@ -11,8 +11,10 @@ import com.modeloDTO.modeloPostulanteDTO;
 
 public interface IServicePostulante extends IGenericService<EPostulante> {
 
-	List<EPostulante>buscarxParametro(String tipo,String valor);
+//	List<EPostulante>buscarxParametro(String tipo,String valor);
 	List<modeloPostulanteDTO> findPostulantetoExamen();//,int page,int size);
 	Page<modeloEvaluacionDTO> findPostulantetoEvaluacion(@Param("valor")String valor, int page,int size);
 	Page<modeloEvaluacionDTO> findPostulantetoEvaluacionxNroDocumento(@Param("valor")String valor, int page,int size);
+	Page<EPostulante> findPaginatedCustomxNombre(@Param("valor")String valor, int page,int size);
+	Page<EPostulante> findPaginatedCustomxDOC(@Param("valor")String valor, int page,int size);
 }

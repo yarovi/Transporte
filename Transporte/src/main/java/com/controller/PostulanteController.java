@@ -91,10 +91,22 @@ public class PostulanteController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		
 	}
-	//paginacion
+	//paginacion y filtrado de el mantenimiento de POSTULANTE
 	@GetMapping("/findget")
-	public Page<EPostulante> findPagination(@RequestParam("page") int page){
-		Page<EPostulante> resultadoPage = postulanteService.findPaginated(page, 10);
+	public Page<EPostulante> findPaginationtoPostulante(
+			@RequestParam("tipo") String tipo,
+			@RequestParam("valor") String valor,
+			@RequestParam("page") int page
+			){
+		Page<EPostulante> resultadoPage =null;
+		if(tipo.equals("nrodocumento")) {
+			 resultadoPage = postulanteService.findPaginatedCustomxDOC(valor,page , ParametroPaginacion.tamPagePrincipal);
+		}else
+		{
+			 resultadoPage = postulanteService.findPaginatedCustomxNombre(valor,page , ParametroPaginacion.tamPagePrincipal);
+		}
+		
+		//Page<EPostulante> resultadoPage = postulanteService.findPaginated(page, 10);
 		if (page > resultadoPage.getTotalPages()) {
 			return null;
 		}
@@ -126,13 +138,16 @@ public class PostulanteController {
 			LOG.info("Todos los postulante  ... "+ lstPostulante);
 			return new ResponseEntity<List<modeloPostulanteDTO>>(lstPostulante,HttpStatus.OK);
 	}
+		
+	//paginacion y filtrado de el mantenimiento de EXAMEN
 	@GetMapping("/allpostulantetoexamen")
 	public Page<modeloEvaluacionDTO> findPostulantetoEvaluacion(
 			@RequestParam("tipo") String tipo,
 			@RequestParam("valor") String valor,
 			@RequestParam("page") int page){
 		
-		Page<modeloEvaluacionDTO> lsresultado=postulanteService.findPostulantetoEvaluacion(valor, page,ParametroPaginacion.tamPageSubcateoria);
+		Page<modeloEvaluacionDTO> lsresultado = null;
+		//postulanteService.findPostulantetoEvaluacion(valor, page,ParametroPaginacion.tamPageSubcateoria);
 		if(tipo.equals("nrodocumento")) {
 			lsresultado=postulanteService.findPostulantetoEvaluacionxNroDocumento(valor, page,ParametroPaginacion.tamPageSubcateoria);
 		}else {

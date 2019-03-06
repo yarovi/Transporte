@@ -61,20 +61,9 @@ public class SercicePostulanteImpl implements IServicePostulante {
 	}
 
 	@Override
-	public List<EPostulante> buscarxParametro(String tipo, String valor) {
+	public List<modeloPostulanteDTO> findPostulantetoExamen(){
 		// TODO Auto-generated method stub
-		if (tipo.equals("nombre"))
-			return null;//postulanteRepository.buscarxParametroNombre(valor);
-		else
-			return null;		
-	}
-
-	@Override
-	public List<modeloPostulanteDTO> findPostulantetoExamen(){//String valor,int page, int size) {
-		// TODO Auto-generated method stub
-		//return postulanteRepository.findPostulantetoExamen(valor, new PageRequest(page,size));
-		List<modeloPostulanteDTO> lsttmp= postulanteRepository.findPostulantetoExamen();
-		 
+		List<modeloPostulanteDTO> lsttmp= postulanteRepository.findPostulantetoExamen();		 
 		 return lsttmp;
 	}
 
@@ -89,5 +78,18 @@ public class SercicePostulanteImpl implements IServicePostulante {
 		// TODO Auto-generated method stub
 		return postulanteRepository.findPostulantetoEvaluacionxNroDocumento(valor,new PageRequest(page,size));
 	}
+
+	@Override
+	public Page<EPostulante> findPaginatedCustomxNombre(String valor, int page, int size) {
+		// TODO Auto-generated method stub
+		return postulanteRepository.findPaginatedCustomxNombre(valor, new PageRequest(page,size));
+	}
+
+	@Override
+	public Page<EPostulante> findPaginatedCustomxDOC(String valor, int page, int size) {
+		// TODO Auto-generated method stub
+		return postulanteRepository.findPaginatedCustomxDOC(valor, new PageRequest(page,size));
+	}
+	
 
 }

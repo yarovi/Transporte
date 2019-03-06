@@ -20,17 +20,21 @@ public interface PostulanteRepository extends JpaRepository<EPostulante,Integer>
 	//@Query("select t from ETipo  t where t.parent_idtipo = :id")
 	//List<EPostulante> buscarxParametroNombre(@Param("contenido")String contenido);	
 	@Query("select  new com.modeloDTO.modeloPostulanteDTO(t.id,concat(t.apellidopaterno,' ',t.apellidomaterno,' ',t.nombre),t.fecharegistro) from EPostulante t  order by t.id desc")
-	List<modeloPostulanteDTO> findPostulantetoExamen();//@Param("valor") String valor,Pageable pageable);
-	//t.estado =:'R' and
-	//concat(t.ApellidoPaterno,' ',t.ApellidoMaterno,' ',
-	//@Query("select  new com.modeloDTO.modeloPostulanteDTO(t.id,concat(t.apellidopaterno, '',t.fechaRegistro) as nom,'hoa') from EPostulante t where  t.nombre like '%:valor%'")
-
-	//cast(t.fechaRegistro as Date)
-	
-	//obtenemos postulantes paginados para la evaluacion (palanca)
+	List<modeloPostulanteDTO> findPostulantetoExamen();	
+	//paginacion principal EVALUIACION (maquinas)
 	@Query("select new com.modeloDTO.modeloEvaluacionDTO(p.id,p.nrodocumento,concat(p.apellidopaterno,' ',p.apellidomaterno,' ',p.nombre),p.edad,p.sexo) from EPostulante  p where concat(p.apellidopaterno,' ',p.apellidomaterno,' ',p.nombre) like %:valor% order by p.id desc")
-	Page<modeloEvaluacionDTO> findPostulantetoEvaluacion(@Param("valor") String valor,Pageable pageable);
-	//TIMESTAMPDIFF(YEAR,p.fechanacimiento,CURDATE())
+	Page<modeloEvaluacionDTO> findPostulantetoEvaluacion(@Param("valor") String valor,Pageable pageable);	
 	@Query("select new com.modeloDTO.modeloEvaluacionDTO(p.id,p.nrodocumento,concat(p.apellidopaterno,' ',p.apellidomaterno,' ',p.nombre),p.edad,p.sexo) from EPostulante  p where p.nrodocumento like %:valor% order by p.id desc")
-	Page<modeloEvaluacionDTO> findPostulantetoEvaluacionxNroDocumento(@Param("valor") String valor,Pageable pageable);
+	Page<modeloEvaluacionDTO> findPostulantetoEvaluacionxNroDocumento(@Param("valor") String valor,Pageable pageable);	
+	//paginacion  principal POSTULANTE
+	@Query("select p from EPostulante p where concat(p.apellidopaterno,' ',p.apellidomaterno,' ',p.nombre) like %:valor% order by p.id desc")
+	Page<EPostulante> findPaginatedCustomxNombre(@Param("valor") String valor,Pageable pageable);
+	@Query("select p from EPostulante  p where p.nrodocumento like %:valor% order by p.id desc")
+	Page<EPostulante> findPaginatedCustomxDOC(@Param("valor") String valor,Pageable pageable);
+	//paginacion  principal de EXAMEN
+	
+	
+	//nota
+	// se puede usar
+	//TIMESTAMPDIFF(YEAR,p.fechanacimiento,CURDATE())
 }
