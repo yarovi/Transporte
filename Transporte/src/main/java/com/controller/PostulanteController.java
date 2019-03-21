@@ -124,22 +124,13 @@ public class PostulanteController {
 	//select personalizados
 	@GetMapping("/allpostulante")
 	public ResponseEntity<List<modeloPostulanteDTO>> findPostulantetoExamen(){
-			//@RequestParam("page") String valor,
-//			@RequestParam("page") int page){
-//		Page<modeloPostulanteDTO> lsresultado=
-//				postulanteService.findPostulantetoExamen(valor, page,ParametroPaginacion.TamPaginacion);
-//		LOG.info("Todos los postulante  ... "+ lsresultado);
-//		if (page > lsresultado.getTotalPages()) {
-//			return null;
-//		}
-//		return lsresultado;
-//		return new ResponseEntity<List<modeloPostulanteDTO>>(lstPostulante,HttpStatus.OK);
+
 			List<modeloPostulanteDTO> lstPostulante=postulanteService.findPostulantetoExamen();
 			LOG.info("Todos los postulante  ... "+ lstPostulante);
 			return new ResponseEntity<List<modeloPostulanteDTO>>(lstPostulante,HttpStatus.OK);
 	}
 		
-	//paginacion y filtrado de el mantenimiento de EXAMEN
+	//paginacion y filtrado de el mantenimiento de Evaluacion 
 	@GetMapping("/allpostulantetoexamen")
 	public Page<modeloEvaluacionDTO> findPostulantetoEvaluacion(
 			@RequestParam("tipo") String tipo,
